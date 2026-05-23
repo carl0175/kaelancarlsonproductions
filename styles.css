@@ -1,0 +1,492 @@
+:root {
+  --black: #050505;
+  --ink: #111111;
+  --paper: #f4f1e8;
+  --white: #ffffff;
+  --muted: #b8b2a6;
+  --acid: #d6ff2f;
+  --signal: #ff3b1f;
+  --blue: #2c6fff;
+  --line: rgba(255, 255, 255, 0.22);
+  --max: 1440px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header {
+  align-items: center;
+  backdrop-filter: blur(18px);
+  background: rgba(5, 5, 5, 0.72);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  left: 0;
+  padding: 1rem clamp(1rem, 4vw, 3rem);
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 20;
+}
+
+.brand {
+  display: grid;
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 0.88;
+  position: relative;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.site-nav {
+  align-items: center;
+  display: flex;
+  gap: clamp(0.8rem, 2vw, 1.8rem);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.site-nav a {
+  opacity: 0.72;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--acid);
+  opacity: 1;
+}
+
+.menu-button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--white);
+  display: none;
+  height: 2.75rem;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  width: 2.75rem;
+  z-index: 2;
+}
+
+.menu-button span {
+  background: currentColor;
+  display: block;
+  height: 2px;
+  position: absolute;
+  transition: transform 180ms ease;
+  width: 1.4rem;
+}
+
+.menu-button span:last-child {
+  transform: translateY(0.45rem);
+}
+
+.menu-button[aria-expanded="true"] span:first-child {
+  transform: rotate(45deg);
+}
+
+.menu-button[aria-expanded="true"] span:last-child {
+  transform: rotate(-45deg);
+}
+
+.hero {
+  align-items: end;
+  display: grid;
+  min-height: 96vh;
+  overflow: hidden;
+  padding: clamp(6rem, 12vw, 10rem) clamp(1rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+  position: relative;
+}
+
+.hero-image {
+  background:
+    linear-gradient(90deg, rgba(5, 5, 5, 0.2), rgba(5, 5, 5, 0.82)),
+    url("assets/hero.png") center / cover;
+  inset: 0;
+  position: absolute;
+  transform: scale(1.02);
+}
+
+.hero-copy {
+  max-width: min(86rem, 100%);
+  position: relative;
+  z-index: 1;
+}
+
+.kicker,
+.label {
+  color: var(--acid);
+  font-size: 0.72rem;
+  font-weight: 900;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: clamp(4.3rem, 16vw, 15.8rem);
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 0.78;
+  margin-bottom: 1.2rem;
+  max-width: 10ch;
+  text-transform: uppercase;
+}
+
+.hero-copy p:last-child {
+  color: var(--paper);
+  font-size: clamp(1.05rem, 2vw, 1.65rem);
+  line-height: 1.35;
+  max-width: 42rem;
+}
+
+.scroll-cue {
+  align-self: end;
+  border: 1px solid var(--line);
+  bottom: clamp(1.5rem, 4vw, 3rem);
+  color: var(--paper);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0.8rem 1rem;
+  position: absolute;
+  right: clamp(1rem, 4vw, 3rem);
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.intro-grid {
+  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
+  margin-inline: auto;
+  max-width: var(--max);
+  padding: clamp(2.5rem, 7vw, 6rem) clamp(1rem, 4vw, 3rem);
+}
+
+.intro-grid p {
+  font-size: clamp(1.55rem, 4vw, 4.7rem);
+  font-weight: 900;
+  line-height: 0.96;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.stat-line {
+  align-content: end;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.stat-line span {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: clamp(1rem, 1.6vw, 1.4rem);
+  font-weight: 800;
+  padding-top: 0.65rem;
+}
+
+.work-section,
+.spotify-section,
+.about-section,
+.contact-section {
+  margin-inline: auto;
+  max-width: var(--max);
+  padding: clamp(4rem, 9vw, 8rem) clamp(1rem, 4vw, 3rem);
+}
+
+.invert {
+  background: var(--paper);
+  color: var(--black);
+  max-width: none;
+}
+
+.invert > * {
+  margin-inline: auto;
+  max-width: calc(var(--max) - 6rem);
+}
+
+.section-heading {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(10rem, 0.35fr) minmax(0, 1fr);
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.section-heading h2,
+.contact-section h2,
+.about-copy h2 {
+  font-size: clamp(2.25rem, 7vw, 7.4rem);
+  font-weight: 950;
+  line-height: 0.9;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.feature-panel {
+  align-items: end;
+  display: grid;
+  gap: clamp(1rem, 4vw, 3rem);
+  grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+}
+
+.feature-panel.image-right {
+  grid-template-columns: minmax(20rem, 0.8fr) minmax(0, 1.2fr);
+}
+
+.feature-panel img,
+.writing-layout img,
+.portrait-frame img {
+  aspect-ratio: 16 / 11;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.feature-panel h3 {
+  font-size: clamp(1.7rem, 4vw, 4.5rem);
+  font-weight: 950;
+  line-height: 0.94;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.feature-panel p:not(.label),
+.about-copy p {
+  color: color-mix(in srgb, currentColor 72%, transparent);
+  font-size: clamp(1rem, 1.35vw, 1.22rem);
+  line-height: 1.6;
+}
+
+.writing-layout {
+  display: grid;
+  gap: clamp(1rem, 4vw, 3rem);
+  grid-template-columns: minmax(0, 0.92fr) minmax(20rem, 1.08fr);
+}
+
+.writing-list {
+  display: grid;
+}
+
+.writing-list article,
+.music-grid article {
+  border-top: 1px solid var(--line);
+  padding: 1.25rem 0;
+}
+
+.writing-list span,
+.music-grid span {
+  color: var(--signal);
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 950;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.writing-list h3,
+.music-grid h3 {
+  font-size: clamp(1.35rem, 2.4vw, 2.65rem);
+  line-height: 1;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.spotify-section {
+  border-top: 1px solid var(--line);
+}
+
+.music-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.music-grid article {
+  background: var(--white);
+  color: var(--black);
+  min-height: 22rem;
+  padding: 1.25rem;
+  position: relative;
+}
+
+.music-grid a {
+  border-top: 1px solid rgba(0, 0, 0, 0.22);
+  bottom: 1.25rem;
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 950;
+  left: 1.25rem;
+  padding-top: 0.8rem;
+  position: absolute;
+  right: 1.25rem;
+  text-transform: uppercase;
+}
+
+.about-section {
+  align-items: center;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: clamp(1.5rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 0.78fr) minmax(20rem, 1.22fr);
+}
+
+.portrait-frame {
+  background: var(--paper);
+  padding: clamp(0.8rem, 2vw, 1.4rem);
+}
+
+.portrait-frame img {
+  aspect-ratio: 4 / 5;
+}
+
+.contact-section {
+  min-height: 74vh;
+}
+
+.contact-section h2 {
+  max-width: 13ch;
+}
+
+.contact-actions {
+  display: grid;
+  gap: 0;
+  margin-top: clamp(2rem, 6vw, 5rem);
+}
+
+.contact-actions a {
+  border-top: 1px solid var(--line);
+  font-size: clamp(1.4rem, 4vw, 4.6rem);
+  font-weight: 950;
+  line-height: 0.95;
+  overflow-wrap: anywhere;
+  padding: 1rem 0;
+  text-transform: uppercase;
+}
+
+.contact-actions a:hover,
+.contact-actions a:focus-visible {
+  color: var(--acid);
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  display: flex;
+  font-size: 0.78rem;
+  font-weight: 800;
+  justify-content: space-between;
+  padding: 1.5rem clamp(1rem, 4vw, 3rem);
+  text-transform: uppercase;
+}
+
+@media (max-width: 860px) {
+  .menu-button {
+    display: inline-flex;
+  }
+
+  .site-nav {
+    background: var(--black);
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    gap: 0;
+    left: 0;
+    padding: 4.6rem 1rem 1rem;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateY(-110%);
+    transition: transform 220ms ease;
+    z-index: 1;
+  }
+
+  .site-nav.is-open {
+    transform: translateY(0);
+  }
+
+  .site-nav a {
+    border-top: 1px solid var(--line);
+    font-size: 1.25rem;
+    padding: 1rem 0;
+  }
+
+  .intro-grid,
+  .section-heading,
+  .feature-panel,
+  .feature-panel.image-right,
+  .writing-layout,
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-panel.image-right img {
+    order: -1;
+  }
+
+  .music-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .music-grid article {
+    min-height: 17rem;
+  }
+
+  .scroll-cue {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero {
+    min-height: 92vh;
+  }
+
+  h1 {
+    font-size: clamp(3.7rem, 22vw, 6.8rem);
+  }
+
+  .contact-actions a {
+    font-size: clamp(1.16rem, 9vw, 2.9rem);
+  }
+
+  footer {
+    display: grid;
+    gap: 0.5rem;
+  }
+}
