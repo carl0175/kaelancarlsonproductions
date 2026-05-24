@@ -357,6 +357,44 @@ h1 {
   text-transform: uppercase;
 }
 
+.art-grid {
+  display: grid;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.art-grid article {
+  background: var(--ink);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  position: relative;
+}
+
+.art-grid article:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.art-grid img {
+  aspect-ratio: 1;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.art-grid span {
+  background: var(--black);
+  color: var(--acid);
+  font-size: 0.72rem;
+  font-weight: 950;
+  left: 0.75rem;
+  line-height: 1;
+  padding: 0.45rem 0.5rem;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0.75rem;
+}
+
 .page-index {
   display: grid;
 }
@@ -535,6 +573,10 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .art-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .music-grid article {
     min-height: 17rem;
   }
@@ -555,6 +597,15 @@ footer {
 
   .contact-actions a {
     font-size: clamp(1.16rem, 9vw, 2.9rem);
+  }
+
+  .art-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .art-grid article:first-child {
+    grid-column: auto;
+    grid-row: auto;
   }
 
   footer {
