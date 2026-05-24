@@ -67,8 +67,8 @@ a {
 .site-nav {
   align-items: center;
   display: flex;
-  gap: clamp(0.8rem, 2vw, 1.8rem);
-  font-size: 0.72rem;
+  gap: clamp(0.7rem, 1.45vw, 1.45rem);
+  font-size: clamp(0.64rem, 0.72vw, 0.72rem);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -78,7 +78,8 @@ a {
 }
 
 .site-nav a:hover,
-.site-nav a:focus-visible {
+.site-nav a:focus-visible,
+.site-nav a[aria-current="page"] {
   color: var(--acid);
   opacity: 1;
 }
@@ -189,6 +190,26 @@ h1 {
   z-index: 1;
 }
 
+.page-hero {
+  display: grid;
+  margin-inline: auto;
+  max-width: var(--max);
+  min-height: 64vh;
+  padding: clamp(7rem, 13vw, 12rem) clamp(1rem, 4vw, 3rem) clamp(3rem, 8vw, 7rem);
+}
+
+.page-hero h1 {
+  align-self: end;
+  font-size: clamp(3.6rem, 12vw, 12rem);
+  max-width: 11ch;
+}
+
+.light-page {
+  background: var(--paper);
+  color: var(--black);
+  max-width: none;
+}
+
 .intro-grid {
   border-bottom: 1px solid var(--line);
   border-top: 1px solid var(--line);
@@ -229,6 +250,10 @@ h1 {
   margin-inline: auto;
   max-width: var(--max);
   padding: clamp(4rem, 9vw, 8rem) clamp(1rem, 4vw, 3rem);
+}
+
+.page-section {
+  padding-top: clamp(2.5rem, 6vw, 5rem);
 }
 
 .invert {
@@ -279,6 +304,7 @@ h1 {
   width: 100%;
 }
 
+.feature-panel h2,
 .feature-panel h3 {
   font-size: clamp(1.7rem, 4vw, 4.5rem);
   font-weight: 950;
@@ -321,11 +347,44 @@ h1 {
 }
 
 .writing-list h3,
+.writing-list h2,
+.music-grid h2,
 .music-grid h3 {
   font-size: clamp(1.35rem, 2.4vw, 2.65rem);
+  font-weight: 950;
   line-height: 1;
   margin: 0;
   text-transform: uppercase;
+}
+
+.page-index {
+  display: grid;
+}
+
+.page-index a {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(10rem, 0.3fr) minmax(0, 1fr);
+  padding: clamp(1rem, 3vw, 2rem) 0;
+}
+
+.page-index span {
+  color: var(--signal);
+  font-size: 0.76rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.page-index strong {
+  font-size: clamp(1.7rem, 4vw, 4.8rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.page-index a:hover strong,
+.page-index a:focus-visible strong {
+  color: var(--acid);
 }
 
 .spotify-section {
@@ -380,7 +439,19 @@ h1 {
   min-height: 74vh;
 }
 
+.standalone-contact {
+  align-content: end;
+  display: grid;
+  min-height: calc(100vh - 4rem);
+  padding-top: clamp(7rem, 13vw, 12rem);
+}
+
 .contact-section h2 {
+  max-width: 13ch;
+}
+
+.standalone-contact h1 {
+  font-size: clamp(3rem, 9vw, 9.5rem);
   max-width: 13ch;
 }
 
@@ -448,6 +519,7 @@ footer {
 
   .intro-grid,
   .section-heading,
+  .page-index a,
   .feature-panel,
   .feature-panel.image-right,
   .writing-layout,

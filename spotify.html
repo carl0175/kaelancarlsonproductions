@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Spotify page for Kaelan Carlson with playlists, album, and songs." />
+    <title>Spotify | Kaelan Carlson</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="index.html" aria-label="Kaelan Carlson home">
+        <span>Kaelan</span>
+        <span>Carlson</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" data-nav>
+        <a href="photography.html">Photography</a>
+        <a href="videography.html">Videography</a>
+        <a href="writing.html">Writing</a>
+        <a href="digital-art.html">Digital Art</a>
+        <a href="spotify.html" aria-current="page">Spotify</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero" aria-labelledby="spotify-title">
+        <p class="kicker">05 / Spotify</p>
+        <h1 id="spotify-title">Sound as archive, influence, and mood board.</h1>
+      </section>
+
+      <section class="spotify-section page-section">
+        <div class="music-grid">
+          <article>
+            <span>Playlists</span>
+            <h2>Seasonal edits and working soundtracks.</h2>
+            <a href="https://open.spotify.com/" target="_blank" rel="noreferrer">Open Spotify</a>
+          </article>
+          <article>
+            <span>Album</span>
+            <h2>Longer-form releases, projects, or curated album notes.</h2>
+            <a href="https://open.spotify.com/" target="_blank" rel="noreferrer">Add album</a>
+          </article>
+          <article>
+            <span>Songs</span>
+            <h2>Singles, favorites, references, and current rotations.</h2>
+            <a href="https://open.spotify.com/" target="_blank" rel="noreferrer">Add songs</a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Kaelan Carlson</span>
+      <a href="about.html">Next: About</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
