@@ -73,7 +73,6 @@ if (gallery) {
       const image = document.createElement("img");
       image.src = source;
       image.alt = `Photography slot ${slotNumber}`;
-      image.loading = "lazy";
       image.decoding = "async";
 
       link.append(image);
