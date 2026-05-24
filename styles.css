@@ -615,7 +615,7 @@ h1 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.youtube-grid article {
+.youtube-grid a {
   background: var(--white);
   color: var(--black);
   display: grid;
@@ -624,15 +624,20 @@ h1 {
   padding: 0.7rem;
 }
 
-.video-frame {
-  aspect-ratio: 16 / 9;
+.youtube-grid a:hover,
+.youtube-grid a:focus-visible {
+  background: var(--acid);
+}
+
+.youtube-thumbnail {
+  aspect-ratio: 7 / 5;
   background: var(--black);
   overflow: hidden;
 }
 
-.video-frame iframe {
-  border: 0;
+.youtube-thumbnail img {
   height: 100%;
+  object-fit: cover;
   width: 100%;
 }
 
