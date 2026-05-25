@@ -245,6 +245,7 @@ h1 {
 
 .work-section,
 .spotify-section,
+.video-link-section,
 .about-section,
 .contact-section {
   margin-inline: auto;
@@ -479,6 +480,10 @@ h1 {
 }
 
 .spotify-section {
+  border-top: 1px solid var(--line);
+}
+
+.video-link-section {
   border-top: 1px solid var(--line);
 }
 
