@@ -57,7 +57,6 @@ const photoFiles = [
   "assets/photos/sept 23 240418.JPG",
   "assets/photos/web worthy sept 23 240316 1.JPG",
   "assets/photos/IMG_0014.JPG",
-  "assets/photos/IMG_0315.JPG",
 ];
 
 const gallery = document.querySelector("#photo-grid");
