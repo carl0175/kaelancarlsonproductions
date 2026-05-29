@@ -246,6 +246,9 @@ h1 {
 .work-section,
 .spotify-section,
 .video-link-section,
+.screenplay-section,
+.journals-section,
+.think-pieces-section,
 .about-section,
 .contact-section {
   margin-inline: auto;
@@ -485,6 +488,59 @@ h1 {
 
 .video-link-section {
   border-top: 1px solid var(--line);
+}
+
+.screenplay-section {
+  border-top: 1px solid var(--line);
+}
+
+.journals-section {
+  border-top: 1px solid var(--line);
+}
+
+.think-pieces-section {
+  border-top: 1px solid var(--line);
+}
+
+.think-piece-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.think-piece-grid a {
+  background: var(--paper);
+  color: var(--black);
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.think-piece-grid a:hover,
+.think-piece-grid a:focus-visible {
+  background: var(--acid);
+}
+
+.think-piece-grid img {
+  aspect-ratio: 8.5 / 11;
+  background: var(--white);
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+.think-piece-grid span {
+  color: var(--signal);
+  font-size: 0.7rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.think-piece-grid strong {
+  font-size: clamp(1.2rem, 2vw, 2.1rem);
+  line-height: 0.95;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
 }
 
 .music-grid {
@@ -798,7 +854,8 @@ footer {
   .spotify-links,
   .spotify-links.compact,
   .spotify-cover-grid,
-  .youtube-grid {
+  .youtube-grid,
+  .think-piece-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -843,7 +900,8 @@ footer {
   .spotify-links,
   .spotify-links.compact,
   .spotify-cover-grid,
-  .youtube-grid {
+  .youtube-grid,
+  .think-piece-grid {
     grid-template-columns: 1fr;
   }
 
