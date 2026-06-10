@@ -6,7 +6,6 @@ const photoFiles = [
   "assets/photos/2S7A2566.JPG",
   "assets/photos/2C6A3B4B-B992-40E9-9457-B9DF4C99EF31.JPG",
   "assets/photos/_81A2714 2.JPG",
-  "assets/photos/C6EE7D2D-6E21-46BB-B928-2E10D10B4D54.JPG",
   "assets/photos/2S7A2570.JPG",
   "assets/photos/F44E11AB-31ED-4FEC-B624-8E21F101E331.JPG",
   "assets/photos/_81A2716.JPG",
@@ -17,7 +16,6 @@ const photoFiles = [
   "assets/photos/306A0028.JPG",
   "assets/photos/52E60263-196B-423A-8826-38B815BAC1D7.JPG",
   "assets/photos/IMG_2999.JPG",
-  "assets/photos/_81A2815.JPG",
   "assets/photos/IMG_4648.JPG",
   "assets/photos/446BC91C-4D73-4BC1-8572-D5BA7368AC78.JPG",
   "assets/photos/306A0049.JPG",
@@ -33,7 +31,6 @@ const photoFiles = [
   "assets/photos/web worthyIMG_4174.JPG",
   "assets/photos/Carlson k SP 2 2.JPG",
   "assets/photos/IMG_4743.JPG",
-  "assets/photos/Carlson k SP 2 6.jpg",
   "assets/photos/web worthyIMG_4185.JPG",
   "assets/photos/_D3A3378.JPG",
   "assets/photos/IMG_4769.JPG",
@@ -60,41 +57,118 @@ const photoFiles = [
 ];
 
 const gallery = document.querySelector("#photo-grid");
-const totalPhotoSpots = 100;
-const emptyRatios = ["1 / 1", "4 / 5", "5 / 4", "16 / 9", "9 / 16", "3 / 2", "2 / 3"];
 
 if (gallery) {
   const fragment = document.createDocumentFragment();
+  let activePhotoIndex = 0;
+  let activeTrigger = null;
 
-  for (let index = 0; index < totalPhotoSpots; index += 1) {
+  const viewer = document.createElement("div");
+  viewer.className = "photo-viewer";
+  viewer.setAttribute("aria-hidden", "true");
+  viewer.innerHTML = `
+    <button class="photo-viewer__close" type="button" aria-label="Close photo viewer">&times;</button>
+    <button class="photo-viewer__nav photo-viewer__nav--prev" type="button" aria-label="Previous photo">&lsaquo;</button>
+    <img class="photo-viewer__image" alt="" />
+    <button class="photo-viewer__nav photo-viewer__nav--next" type="button" aria-label="Next photo">&rsaquo;</button>
+    <span class="photo-viewer__count" aria-live="polite"></span>
+  `;
+
+  const viewerImage = viewer.querySelector(".photo-viewer__image");
+  const viewerCount = viewer.querySelector(".photo-viewer__count");
+  const closeButton = viewer.querySelector(".photo-viewer__close");
+  const previousButton = viewer.querySelector(".photo-viewer__nav--prev");
+  const nextButton = viewer.querySelector(".photo-viewer__nav--next");
+
+  const setViewerPhoto = (index) => {
+    activePhotoIndex = (index + photoFiles.length) % photoFiles.length;
+    const source = photoFiles[activePhotoIndex];
+    viewerImage.src = source;
+    viewerImage.alt = `Photography image ${String(activePhotoIndex + 1).padStart(3, "0")}`;
+    viewerCount.textContent = `${activePhotoIndex + 1} / ${photoFiles.length}`;
+  };
+
+  const openViewer = (index, trigger) => {
+    activeTrigger = trigger;
+    setViewerPhoto(index);
+    viewer.classList.add("is-open");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.classList.add("has-photo-viewer");
+    closeButton.focus();
+  };
+
+  const closeViewer = () => {
+    viewer.classList.remove("is-open");
+    viewer.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("has-photo-viewer");
+    activeTrigger?.focus();
+  };
+
+  const showPreviousPhoto = () => setViewerPhoto(activePhotoIndex - 1);
+  const showNextPhoto = () => setViewerPhoto(activePhotoIndex + 1);
+
+  photoFiles.forEach((source, index) => {
     const slotNumber = String(index + 1).padStart(3, "0");
-    const source = photoFiles[index];
     const figure = document.createElement("figure");
     figure.className = "photo-card";
 
-    if (source) {
-      const link = document.createElement("a");
-      link.href = source;
-      link.target = "_blank";
-      link.rel = "noreferrer";
+    const link = document.createElement("a");
+    link.href = source;
+    link.setAttribute("aria-label", `Open photography image ${slotNumber}`);
 
-      const image = document.createElement("img");
-      image.src = source;
-      image.alt = `Photography slot ${slotNumber}`;
-      image.decoding = "async";
+    const image = document.createElement("img");
+    image.src = source;
+    image.alt = `Photography slot ${slotNumber}`;
+    image.decoding = "async";
 
-      link.append(image);
-      figure.append(link);
-    } else {
-      figure.classList.add("is-empty");
-      figure.style.setProperty("--ratio", emptyRatios[index % emptyRatios.length]);
-      const label = document.createElement("span");
-      label.textContent = `Photo ${slotNumber}`;
-      figure.append(label);
-    }
+    link.append(image);
+    figure.append(link);
 
     fragment.append(figure);
-  }
+  });
 
   gallery.append(fragment);
+  document.body.append(viewer);
+
+  gallery.addEventListener("click", (event) => {
+    const link = event.target.closest(".photo-card a");
+
+    if (!link) {
+      return;
+    }
+
+    event.preventDefault();
+    openViewer(photoFiles.indexOf(link.getAttribute("href")), link);
+  });
+
+  closeButton.addEventListener("click", closeViewer);
+  previousButton.addEventListener("click", showPreviousPhoto);
+  nextButton.addEventListener("click", showNextPhoto);
+
+  viewer.addEventListener("click", (event) => {
+    if (event.target === viewer) {
+      closeViewer();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!viewer.classList.contains("is-open")) {
+      return;
+    }
+
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeViewer();
+    }
+
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      showPreviousPhoto();
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      showNextPhoto();
+    }
+  });
 }
