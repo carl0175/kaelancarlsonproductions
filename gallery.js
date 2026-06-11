@@ -63,6 +63,12 @@ if (gallery) {
   let activePhotoIndex = 0;
   let activeTrigger = null;
 
+  const optimizedPhoto = (source, folder) => {
+    const pathParts = source.split("/");
+    const fileName = pathParts.pop();
+    return `${pathParts.join("/")}/${folder}/${fileName}`;
+  };
+
   const viewer = document.createElement("div");
   viewer.className = "photo-viewer";
   viewer.setAttribute("aria-hidden", "true");
@@ -83,7 +89,7 @@ if (gallery) {
   const setViewerPhoto = (index) => {
     activePhotoIndex = (index + photoFiles.length) % photoFiles.length;
     const source = photoFiles[activePhotoIndex];
-    viewerImage.src = source;
+    viewerImage.src = optimizedPhoto(source, "large");
     viewerImage.alt = `Photography image ${String(activePhotoIndex + 1).padStart(3, "0")}`;
     viewerCount.textContent = `${activePhotoIndex + 1} / ${photoFiles.length}`;
   };
@@ -113,13 +119,16 @@ if (gallery) {
     figure.className = "photo-card";
 
     const link = document.createElement("a");
-    link.href = source;
+    link.href = optimizedPhoto(source, "large");
+    link.dataset.index = String(index);
     link.setAttribute("aria-label", `Open photography image ${slotNumber}`);
 
     const image = document.createElement("img");
-    image.src = source;
+    image.src = optimizedPhoto(source, "thumbs");
     image.alt = `Photography slot ${slotNumber}`;
     image.decoding = "async";
+    image.loading = index < 8 ? "eager" : "lazy";
+    image.fetchPriority = index < 3 ? "high" : "low";
 
     link.append(image);
     figure.append(link);
@@ -138,7 +147,7 @@ if (gallery) {
     }
 
     event.preventDefault();
-    openViewer(photoFiles.indexOf(link.getAttribute("href")), link);
+    openViewer(Number(link.dataset.index), link);
   });
 
   closeButton.addEventListener("click", closeViewer);
