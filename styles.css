@@ -55,18 +55,20 @@ a {
 }
 
 .brand {
-  display: grid;
-  font-size: 0.82rem;
-  font-weight: 900;
-  line-height: 0.88;
+  display: block;
   position: relative;
-  text-transform: uppercase;
   z-index: 2;
+}
+
+.brand img {
+  display: block;
+  height: clamp(2rem, 4.5vw, 3.4rem);
+  width: auto;
 }
 
 .brand:hover,
 .brand:focus-visible {
-  color: var(--acid);
+  filter: drop-shadow(0 0 0.9rem rgba(237, 28, 36, 0.7));
 }
 
 .site-nav {
