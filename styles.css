@@ -331,6 +331,13 @@ h1 {
   line-height: 1.6;
 }
 
+.about-logo {
+  display: block;
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+  max-width: min(100%, 44rem);
+  width: 100%;
+}
+
 .photo-gallery-section {
   margin-inline: auto;
   max-width: min(1800px, 100%);
