@@ -41,7 +41,7 @@ body::before {
   background-size: var(--page-pattern-size);
   content: "";
   inset: 0;
-  opacity: 0.25;
+  opacity: 1;
   pointer-events: none;
   position: fixed;
   z-index: 0;
@@ -225,17 +225,6 @@ a {
   inset: 0;
   position: absolute;
   transform: scale(1.02);
-}
-
-.hero-image::after {
-  background-image: var(--page-pattern);
-  background-position: center;
-  background-size: var(--page-pattern-size);
-  content: "";
-  inset: 0;
-  opacity: 0.25;
-  pointer-events: none;
-  position: absolute;
 }
 
 .hero-copy {
@@ -849,6 +838,18 @@ h1 {
   height: auto;
   object-fit: cover;
   width: 100%;
+}
+
+.spotify-art-fallback {
+  align-items: center;
+  aspect-ratio: 1;
+  background: var(--black);
+  color: var(--white);
+  display: grid;
+  font-size: clamp(1.4rem, 4vw, 3rem);
+  font-weight: 950;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
 .spotify-cover-grid span {
