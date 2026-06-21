@@ -375,22 +375,6 @@ h1 {
   transform: scale(1.015);
 }
 
-.photo-card.is-empty {
-  align-items: end;
-  aspect-ratio: var(--ratio, 1 / 1);
-  border-style: dashed;
-  color: var(--muted);
-  display: grid;
-  padding: 0.75rem;
-}
-
-.photo-card.is-empty span {
-  color: var(--acid);
-  font-size: 0.72rem;
-  font-weight: 950;
-  text-transform: uppercase;
-}
-
 .has-photo-viewer {
   overflow: hidden;
 }

@@ -60,6 +60,7 @@ const gallery = document.querySelector("#photo-grid");
 
 if (gallery) {
   const fragment = document.createDocumentFragment();
+  const availablePhotos = [...photoFiles];
   let activePhotoIndex = 0;
   let activeTrigger = null;
 
@@ -85,11 +86,15 @@ if (gallery) {
   const nextButton = viewer.querySelector(".photo-viewer__nav--next");
 
   const setViewerPhoto = (index) => {
-    activePhotoIndex = (index + photoFiles.length) % photoFiles.length;
-    const source = photoFiles[activePhotoIndex];
+    if (availablePhotos.length === 0) {
+      return;
+    }
+
+    activePhotoIndex = (index + availablePhotos.length) % availablePhotos.length;
+    const source = availablePhotos[activePhotoIndex];
     viewerImage.src = optimizedPhoto(source, "large");
     viewerImage.alt = `Photography image ${String(activePhotoIndex + 1).padStart(3, "0")}`;
-    viewerCount.textContent = `${activePhotoIndex + 1} / ${photoFiles.length}`;
+    viewerCount.textContent = `${activePhotoIndex + 1} / ${availablePhotos.length}`;
   };
 
   const openViewer = (index, trigger) => {
@@ -99,6 +104,16 @@ if (gallery) {
     viewer.setAttribute("aria-hidden", "false");
     document.body.classList.add("has-photo-viewer");
     closeButton.focus();
+  };
+
+  const openViewerForSource = (source, trigger) => {
+    const index = availablePhotos.indexOf(source);
+
+    if (index < 0) {
+      return;
+    }
+
+    openViewer(index, trigger);
   };
 
   const closeViewer = () => {
@@ -111,6 +126,16 @@ if (gallery) {
   const showPreviousPhoto = () => setViewerPhoto(activePhotoIndex - 1);
   const showNextPhoto = () => setViewerPhoto(activePhotoIndex + 1);
 
+  const removeMissingPhoto = (source, figure) => {
+    const photoIndex = availablePhotos.indexOf(source);
+
+    if (photoIndex >= 0) {
+      availablePhotos.splice(photoIndex, 1);
+    }
+
+    figure.remove();
+  };
+
   photoFiles.forEach((source, index) => {
     const slotNumber = String(index + 1).padStart(3, "0");
     const figure = document.createElement("figure");
@@ -118,7 +143,7 @@ if (gallery) {
 
     const link = document.createElement("a");
     link.href = optimizedPhoto(source, "large");
-    link.dataset.index = String(index);
+    link.dataset.source = source;
     link.setAttribute("aria-label", `Open photography image ${slotNumber}`);
 
     const image = document.createElement("img");
@@ -127,6 +152,9 @@ if (gallery) {
     image.decoding = "async";
     image.loading = index < 8 ? "eager" : "lazy";
     image.fetchPriority = index < 3 ? "high" : "low";
+    image.addEventListener("error", () => removeMissingPhoto(source, figure), {
+      once: true,
+    });
 
     link.append(image);
     figure.append(link);
@@ -145,12 +173,13 @@ if (gallery) {
     }
 
     event.preventDefault();
-    openViewer(Number(link.dataset.index), link);
+    openViewerForSource(link.dataset.source, link);
   });
 
   closeButton.addEventListener("click", closeViewer);
   previousButton.addEventListener("click", showPreviousPhoto);
   nextButton.addEventListener("click", showNextPhoto);
+  viewerImage.addEventListener("error", showNextPhoto);
 
   viewer.addEventListener("click", (event) => {
     if (event.target === viewer) {
