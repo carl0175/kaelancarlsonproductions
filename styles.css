@@ -538,9 +538,22 @@ h1 {
   grid-row: auto;
 }
 
+.art-grid a {
+  color: inherit;
+  display: block;
+}
+
 .art-grid img {
+  display: block;
   height: auto;
+  transition: filter 180ms ease, transform 180ms ease;
   width: 100%;
+}
+
+.art-grid a:hover img,
+.art-grid a:focus-visible img {
+  filter: contrast(1.08);
+  transform: scale(1.015);
 }
 
 .art-grid span {
